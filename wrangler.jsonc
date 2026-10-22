@@ -1,0 +1,43 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "signsbynat-ai-visibility",
+	"main": "./src/worker/index.ts",
+	"compatibility_date": "2025-10-08",
+	"upload_source_maps": true,
+	"observability": {
+		"enabled": true
+	},
+	"assets": {
+		"directory": "./dist/client",
+		"not_found_handling": "single-page-application",
+		"run_worker_first": [
+			"/.well-known/web-bot-auth/*",
+			"/api",
+			"/api/*",
+			"/index.json",
+			"/jsonld",
+			"/llms-full.txt",
+			"/llms.txt",
+			"/robots.txt",
+			"/*.jsonld",
+			"/*.md"
+		]
+	},
+	"ai": {
+		"binding": "AI"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "VISIBILITY_CACHE",
+			"id": "9eba3c780bb14f92a00048c9cbe92ed5"
+		}
+	],
+	"vars": {
+		"SITE_NAME": "Heavy Letters - Signs by Nat | Sign Painter of Hand Painted Signs and Gold Leaf",
+		"SITE_DESCRIPTION": "Sign Painter Specializing in Hand Painted Signs and Gold Leaf in California and New York",
+		"AI_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+		"ENRICHMENT_CACHE_TTL": "3600",
+		"CONTENT_SIGNAL": "ai-input=yes, search=yes, ai-train=no",
+		"ENABLE_WEB_BOT_AUTH": "false"
+	}
+}
